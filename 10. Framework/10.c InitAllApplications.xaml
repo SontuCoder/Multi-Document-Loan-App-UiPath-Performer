@@ -86,19 +86,19 @@
       <AssemblyReference>UiPath.Platform</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="_10_c_InitAllApplications" sap:VirtualizedContainerService.HintSize="864.0000000000001,788.8" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="_10_c_InitAllApplications" sap:VirtualizedContainerService.HintSize="864.0000000000001,845.6" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:OpenBrowser AutomaticallyDownloadWebDriver="{x:Null}" BrowserType="{x:Null}" CommunicationMethod="{x:Null}" Hidden="{x:Null}" NewSession="{x:Null}" Private="{x:Null}" UiBrowser="{x:Null}" DisplayName="10.c Open Browser - Bank" sap:VirtualizedContainerService.HintSize="516.8,765.6" sap2010:WorkflowViewState.IdRef="OpenBrowser_1" Url="[istrUrl]">
+    <ui:OpenBrowser AutomaticallyDownloadWebDriver="{x:Null}" CommunicationMethod="{x:Null}" Hidden="{x:Null}" NewSession="{x:Null}" Private="{x:Null}" UiBrowser="{x:Null}" BrowserType="Edge" DisplayName="10.c Open Browser - Bank" sap:VirtualizedContainerService.HintSize="516.8,822.4" sap2010:WorkflowViewState.IdRef="OpenBrowser_1" Url="[istrUrl]">
       <ui:OpenBrowser.Body>
         <ActivityAction x:TypeArguments="x:Object">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="10.c Do - Loan Page" sap:VirtualizedContainerService.HintSize="483.2,616.8" sap2010:WorkflowViewState.IdRef="Sequence_2">
+          <Sequence DisplayName="10.c Do - Loan Page" sap:VirtualizedContainerService.HintSize="483.2,673.6" sap2010:WorkflowViewState.IdRef="Sequence_2">
             <Sequence.Variables>
               <Variable x:TypeArguments="x:Boolean" Name="boolDash" />
             </Sequence.Variables>
@@ -107,6 +107,7 @@
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
+            <ui:MaximizeWindow Window="{x:Null}" DisplayName="10.c Maximize Window" sap:VirtualizedContainerService.HintSize="449.6,56.8" sap2010:WorkflowViewState.IdRef="MaximizeWindow_1" />
             <ui:Click AlterIfDisabled="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" DelayBefore="10000" DisplayName="10.c Click - Dashboard" sap:VirtualizedContainerService.HintSize="449.6,56.8" sap2010:WorkflowViewState.IdRef="Click_1" KeyModifiers="None" MouseButton="BTN_LEFT">
               <ui:Click.CursorPosition>
                 <ui:CursorPosition Position="Center">
@@ -119,7 +120,7 @@
                 </ui:CursorPosition>
               </ui:Click.CursorPosition>
               <ui:Click.Target>
-                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="bcdc6bb3-e019-4754-9837-c502194ff87d" InformativeScreenshot="55215616323262d8dfbc742ebdebf73b" Selector="&lt;html app='chrome.exe' title='ABCD Bank' /&gt;&lt;webctrl class='mat-mdc-button-touch-target' tag='SPAN' /&gt;">
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="bcdc6bb3-e019-4754-9837-c502194ff87d" InformativeScreenshot="78d7c1220f1250dc95653801f2eef5cb" Selector="&lt;webctrl aaname='Dashboard' /&gt;">
                   <ui:Target.TimeoutMS>
                     <InArgument x:TypeArguments="x:Int32" />
                   </ui:Target.TimeoutMS>
@@ -137,7 +138,7 @@
             </ui:Click>
             <ui:UiElementExists DisplayName="10.c Element Exists - Dash Page" Exists="[boolDash]" sap:VirtualizedContainerService.HintSize="449.6,56.8" sap2010:WorkflowViewState.IdRef="UiElementExists_1">
               <ui:UiElementExists.Target>
-                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="5d2bd4f8-5f92-463a-bc4f-39af36913926" InformativeScreenshot="f8bf3d17b34ada56081420c0b23e2568" Selector="&lt;html app='chrome.exe' title='ABCD Bank' /&gt;&lt;webctrl tag='SPAN' /&gt;">
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="5d2bd4f8-5f92-463a-bc4f-39af36913926" InformativeScreenshot="f8bf3d17b34ada56081420c0b23e2568" Selector="&lt;webctrl aaname='ABCD Bank Loan Application' /&gt;">
                   <ui:Target.TimeoutMS>
                     <InArgument x:TypeArguments="x:Int32" />
                   </ui:Target.TimeoutMS>

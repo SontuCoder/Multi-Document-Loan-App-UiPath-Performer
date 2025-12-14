@@ -130,7 +130,12 @@
               <OutArgument x:TypeArguments="s:String[]">[arrstrAssets]</OutArgument>
             </ui:AssignOperation.To>
             <ui:AssignOperation.Value>
-              <InArgument x:TypeArguments="s:String[]">[{""}]</InArgument>
+              <InArgument x:TypeArguments="s:String[]" xml:space="preserve">[{"L2 Bank URL",
+"L2 Kill process",
+"L2 Mail Templates",
+"L2 Max Consecutive System Exceptions",
+"L2 Queue Items",
+"L2 Storage Bucket"}]</InArgument>
             </ui:AssignOperation.Value>
           </ui:AssignOperation>
           <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_5">
