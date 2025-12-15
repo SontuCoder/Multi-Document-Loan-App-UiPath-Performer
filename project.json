@@ -5,9 +5,11 @@
   "main": "Main.xaml",
   "dependencies": {
     "UiPath.Excel.Activities": "[2.24.4]",
+    "UiPath.Persistence.Activities": "[1.7.2]",
     "UiPath.System.Activities": "[24.10.7]",
     "UiPath.Testing.Activities": "[24.10.3]",
-    "UiPath.UIAutomation.Activities": "[24.10.10]"
+    "UiPath.UIAutomation.Activities": "[24.10.10]",
+    "UiPath.WebAPI.Activities": "[2.3.2]"
   },
   "webServices": [],
   "entitiesStores": [],
