@@ -88,41 +88,50 @@
       <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
       <AssemblyReference>System.Collections</AssemblyReference>
       <AssemblyReference>System.Linq.Async</AssemblyReference>
+      <AssemblyReference>UiPath.Workflow</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Sontu_s_Play" sap:VirtualizedContainerService.HintSize="804,658.84" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Sontu_s_Play" sap:VirtualizedContainerService.HintSize="787.2,913.6" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="njl:JObject" Name="jsonData" />
+      <Variable x:TypeArguments="scg:IEnumerable(ui:QueueItem)" Name="queueItems" />
+      <Variable x:TypeArguments="scg:Dictionary(x:String, x:Object)" Name="dictAssets" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="416,56.8" sap2010:WorkflowViewState.IdRef="CommentOut_3">
-      <ui:CommentOut.Body>
-        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="416,278.4" sap2010:WorkflowViewState.IdRef="Sequence_4">
-          <sap:WorkflowViewStateService.ViewState>
-            <scg:Dictionary x:TypeArguments="x:String, x:Object">
-              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            </scg:Dictionary>
-          </sap:WorkflowViewStateService.ViewState>
-          <ui:AddQueueItem ServiceBaseAddress="{x:Null}" TimeoutMS="{x:Null}" DisplayName="Add Queue Item" FolderPath="Advance Projects/Bank Loan Application" sap:VirtualizedContainerService.HintSize="382.4,218.4" sap2010:WorkflowViewState.IdRef="AddQueueItem_3" Priority="Normal" QueueType="L1 Action Result Data">
-            <ui:AddQueueItem.ItemInformation>
-              <InArgument x:TypeArguments="x:String" x:Key="Mail Id">&lt;014b01dc3b5a$ce634560$6b29d020$@gmail.com&gt;</InArgument>
-              <InArgument x:TypeArguments="x:String" x:Key="Document Data">{''AadharCard'':{''Task ID'':''2605540'',''File Prefix'':''35bc190b-495a-4622-96f7-f83284682694''},''PanCard'':{''Task ID'':''2605544'',''File Prefix'':''e90272b3-d596-4e1b-a541-f6d5bb3709b2''},''LoanApplication'':{''Task ID'':''2605542'',''File Prefix'':''d1689176-929c-4292-bc0b-ecf7d3de9636''},''SalarySlip'':{''Task ID'':''2605546'',''File Prefix'':''89aa4e91-8241-4088-a321-07cef07342d4''}}</InArgument>
-            </ui:AddQueueItem.ItemInformation>
-          </ui:AddQueueItem>
-        </Sequence>
-      </ui:CommentOut.Body>
-      <sap:WorkflowViewStateService.ViewState>
-        <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-          <x:Boolean x:Key="IsPinned">False</x:Boolean>
-        </scg:Dictionary>
-      </sap:WorkflowViewStateService.ViewState>
-    </ui:CommentOut>
-    <ui:DeserializeJson x:TypeArguments="njl:JObject" JsonSample="{x:Null}" Settings="{x:Null}" DisplayName="Deserialize JSON" sap:VirtualizedContainerService.HintSize="416,173.6" sap2010:WorkflowViewState.IdRef="DeserializeJson`1_2" JsonObject="[jsonData]" JsonString="[&quot;{&quot;&quot;AadharCard&quot;&quot;:{&quot;&quot;Task ID&quot;&quot;:&quot;&quot;2605540&quot;&quot;,&quot;&quot;File Prefix&quot;&quot;:&quot;&quot;35bc190b-495a-4622-96f7-f83284682694&quot;&quot;},&quot;&quot;PanCard&quot;&quot;:{&quot;&quot;Task ID&quot;&quot;:&quot;&quot;2605544&quot;&quot;,&quot;&quot;File Prefix&quot;&quot;:&quot;&quot;e90272b3-d596-4e1b-a541-f6d5bb3709b2&quot;&quot;},&quot;&quot;LoanApplication&quot;&quot;:{&quot;&quot;Task ID&quot;&quot;:&quot;&quot;2605542&quot;&quot;,&quot;&quot;File Prefix&quot;&quot;:&quot;&quot;d1689176-929c-4292-bc0b-ecf7d3de9636&quot;&quot;},&quot;&quot;SalarySlip&quot;&quot;:{&quot;&quot;Task ID&quot;&quot;:&quot;&quot;2605546&quot;&quot;,&quot;&quot;File Prefix&quot;&quot;:&quot;&quot;89aa4e91-8241-4088-a321-07cef07342d4&quot;&quot;}}&quot;]" />
-    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="416,165.6" sap2010:WorkflowViewState.IdRef="LogMessage_1" Message="[&quot;&quot;]" />
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="10.a InitAllSettings - Invoke Workflow File (10. Framework\10.a InitAllSettings.xaml)" sap:VirtualizedContainerService.HintSize="449.6,176" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="10. Framework\10.a InitAllSettings.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <OutArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="odictAssets">[dictAssets]</OutArgument>
+        <OutArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="odictMailTemplate" />
+        <InArgument x:TypeArguments="x:String" x:Key="istrOrchestratorName">Advance Projects/Bank Loan Application</InArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <ui:GetQueueItems Duration="{x:Null}" From="{x:Null}" Priority="{x:Null}" Reference="{x:Null}" Skip="{x:Null}" TimeoutMS="{x:Null}" To="{x:Null}" Top="{x:Null}" DisplayName="Get Queue Items" FilterStrategy="Equals" FolderPath="Advance Projects/Bank Loan Application" sap:VirtualizedContainerService.HintSize="449.6,175.2" sap2010:WorkflowViewState.IdRef="GetQueueItems_1" QueueItemStates="InProgress" QueueName="L1 Action Result Data" Result="[queueItems]" />
+    <ui:ForEach x:TypeArguments="ui:QueueItem" CurrentIndex="{x:Null}" DisplayName="For Each currentQueueItem" sap:VirtualizedContainerService.HintSize="449.6,373.6" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[queueItems]">
+      <ui:ForEach.Body>
+        <ActivityAction x:TypeArguments="ui:QueueItem">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="ui:QueueItem" Name="currentQueueItem" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="416,227.2" sap2010:WorkflowViewState.IdRef="Sequence_5">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="10.e Process - Invoke Workflow File (10. Framework\10.e Process.xaml)" sap:VirtualizedContainerService.HintSize="382.4,167.2" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="10. Framework\10.e Process.xaml">
+              <ui:InvokeWorkflowFile.Arguments>
+                <InArgument x:TypeArguments="ui:QueueItem" x:Key="iqueTransactionItem">[currentQueueItem]</InArgument>
+                <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="idictAsset">[dictAssets]</InArgument>
+              </ui:InvokeWorkflowFile.Arguments>
+            </ui:InvokeWorkflowFile>
+          </Sequence>
+        </ActivityAction>
+      </ui:ForEach.Body>
+    </ui:ForEach>
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="449.6,165.6" sap2010:WorkflowViewState.IdRef="LogMessage_1" Message="[&quot;&quot;]" />
   </Sequence>
 </Activity>

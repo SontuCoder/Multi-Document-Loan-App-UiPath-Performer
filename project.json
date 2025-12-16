@@ -4,6 +4,7 @@
   "description": "Robotic Enterprise Framework",
   "main": "Main.xaml",
   "dependencies": {
+    "UiPath.DataService.Activities": "[25.9.3]",
     "UiPath.Excel.Activities": "[2.24.4]",
     "UiPath.Persistence.Activities": "[1.7.2]",
     "UiPath.System.Activities": "[24.10.7]",
@@ -12,7 +13,14 @@
     "UiPath.WebAPI.Activities": "[2.3.2]"
   },
   "webServices": [],
-  "entitiesStores": [],
+  "entitiesStores": [
+    {
+      "serviceDocument": ".entities/EntitiesStore.json",
+      "tenantName": "DefaultTenant",
+      "namespace": "Multi_Document_Loan_App_UiPath_Performer",
+      "uniqueReference": "5YESwfLfv/ycQ5mck0huTTiwW5wkK6hWpHkiYX9Nmzo="
+    }
+  ],
   "schemaVersion": "4.0",
   "studioVersion": "24.10.8.0",
   "projectVersion": "1.0.0",
