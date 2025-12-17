@@ -122,7 +122,7 @@
       <AssemblyReference>UiPath.UIAutomationNext</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="_20_b_Extract_Verified_Data" sap:VirtualizedContainerService.HintSize="787.2,692" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="_20_b_Extract_Verified_Data" sap:VirtualizedContainerService.HintSize="787.2,823.2" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="upamt:TaskData" Name="taskData" />
       <Variable x:TypeArguments="x:String" Name="strOutText" />
@@ -169,18 +169,18 @@
         </Sequence>
       </If.Else>
     </If>
-    <ucas:DownloadStorageFile TimeoutMS="{x:Null}" Destination="[idictAssets(&quot;L2 temp Folder&quot;).ToString+&quot;\out-folder.zip&quot;]" DisplayName="Download Storage File" sap:VirtualizedContainerService.HintSize="416,166.4" sap2010:WorkflowViewState.IdRef="DownloadStorageFile_1" Path="[istrFilePrefix+&quot;/output_results.zip&quot;]" StorageBucketName="[idictAssets(&quot;L1 Action Bucket Name&quot;).ToString]">
+    <ucas:DownloadStorageFile TimeoutMS="{x:Null}" Destination="[idictAssets(&quot;L2 temp Folder&quot;).ToString+&quot;\out-folder.zip&quot;]" DisplayName="Download Storage File" sap:VirtualizedContainerService.HintSize="416,56.8" sap2010:WorkflowViewState.IdRef="DownloadStorageFile_1" Path="[istrFilePrefix+&quot;/output_results.zip&quot;]" StorageBucketName="[idictAssets(&quot;L1 Action Bucket Name&quot;).ToString]">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
           <x:Boolean x:Key="IsPinned">False</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ucas:DownloadStorageFile>
-    <uascw:ExtractFiles Content="{x:Null}" DestinationFolderInfo="{x:Null}" File="{x:Null}" Password="{x:Null}" CodePage="Default" ConflictResolution="Replace" DestinationFolder="[idictAssets(&quot;L2 temp Folder&quot;).ToString+&quot;\&quot;]" DisplayName="Extract/Unzip Files" ExtractToADedicatedFolder="True" FileToExtract="[idictAssets(&quot;L2 temp Folder&quot;).ToString+&quot;\out-folder.zip&quot;]" sap:VirtualizedContainerService.HintSize="416,56.8" sap2010:WorkflowViewState.IdRef="ExtractFiles_1" SkipUnsupportedFiles="False">
+    <uascw:ExtractFiles Content="{x:Null}" DestinationFolderInfo="{x:Null}" File="{x:Null}" Password="{x:Null}" CodePage="Default" ConflictResolution="Replace" DestinationFolder="[idictAssets(&quot;L2 temp Folder&quot;).ToString+&quot;\&quot;]" DisplayName="Extract/Unzip Files" ExtractToADedicatedFolder="True" FileToExtract="[idictAssets(&quot;L2 temp Folder&quot;).ToString+&quot;\out-folder.zip&quot;]" sap:VirtualizedContainerService.HintSize="416,240.8" sap2010:WorkflowViewState.IdRef="ExtractFiles_1" SkipUnsupportedFiles="False">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           <x:Boolean x:Key="IsPinned">False</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
@@ -201,6 +201,14 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:ReadTextFile>
+    <ui:DeleteFolderX DisplayName="Delete Folder" sap:VirtualizedContainerService.HintSize="416,56.8" sap2010:WorkflowViewState.IdRef="DeleteFolderX_1" Path="[idictAssets(&quot;L2 temp Folder&quot;).ToString+&quot;\out-folder&quot;]" Recursive="True">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:DeleteFolderX>
     <ui:DeserializeJson x:TypeArguments="njl:JObject" JsonSample="{x:Null}" Settings="{x:Null}" DisplayName="Deserialize JSON" sap:VirtualizedContainerService.HintSize="416,56.8" sap2010:WorkflowViewState.IdRef="DeserializeJson`1_1" JsonObject="[jsonData]" JsonString="[strOutText]">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
