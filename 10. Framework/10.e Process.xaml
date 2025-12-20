@@ -2,6 +2,7 @@
   <x:Members>
     <x:Property sap2010:Annotation.AnnotationText="Transaction item to be processed." Name="iqueTransactionItem" Type="InArgument(ui:QueueItem)" />
     <x:Property sap2010:Annotation.AnnotationText="Dictionary structure to store configuration data of the process (settings, constants and assets)." Name="idictAsset" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property Name="iodictVerifiedData" Type="InOutArgument(scg:Dictionary(x:String, x:String))" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
@@ -93,12 +94,13 @@
       <AssemblyReference>System.Linq.Expressions</AssemblyReference>
       <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
       <AssemblyReference>System.Runtime.Numerics</AssemblyReference>
+      <AssemblyReference>System.Memory.Data</AssemblyReference>
+      <AssemblyReference>System.Linq.Async</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Invoke major steps of the business process, which are usually implemented by multiple subworkflows.&#xA;&#xA;If a BusinessRuleException is thrown, the transaction is skipped. &#xA;If another kind of exception occurs, the current transaction can be retried. " DisplayName="Process" sap:VirtualizedContainerService.HintSize="787.2,715.2" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Invoke major steps of the business process, which are usually implemented by multiple subworkflows.&#xA;&#xA;If a BusinessRuleException is thrown, the transaction is skipped. &#xA;If another kind of exception occurs, the current transaction can be retried. " DisplayName="Process" sap:VirtualizedContainerService.HintSize="864.0000000000001,777.6" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="scg:Dictionary(x:String, x:String)" Name="dictQueueData" />
-      <Variable x:TypeArguments="scg:Dictionary(x:String, x:String)" Name="dictVerifiedData" />
       <Variable x:TypeArguments="x:String" Name="strAccount" />
       <Variable x:TypeArguments="x:String" Name="strIFSC" />
       <Variable x:TypeArguments="x:String" Name="ostrLoanID" />
@@ -129,25 +131,11 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:InvokeWorkflowFile>
-    <Assign sap:VirtualizedContainerService.HintSize="416,56.8" sap2010:WorkflowViewState.IdRef="Assign_1">
-      <Assign.To>
-        <OutArgument x:TypeArguments="scg:Dictionary(x:String, x:String)">[dictVerifiedData]</OutArgument>
-      </Assign.To>
-      <Assign.Value>
-        <InArgument x:TypeArguments="scg:Dictionary(x:String, x:String)">[new Dictionary(of String, String)]</InArgument>
-      </Assign.Value>
-      <sap:WorkflowViewStateService.ViewState>
-        <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-          <x:Boolean x:Key="IsPinned">False</x:Boolean>
-        </scg:Dictionary>
-      </sap:WorkflowViewStateService.ViewState>
-    </Assign>
     <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="20.b Extract Verified Data - Aadhar" sap:VirtualizedContainerService.HintSize="416,56.8" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="20. Process Works\20.b Extract Verified Data.xaml">
       <ui:InvokeWorkflowFile.Arguments>
         <InArgument x:TypeArguments="x:Int32" x:Key="iintTaskId">[Cint(dictQueueData("Aadhar Task"))]</InArgument>
         <InArgument x:TypeArguments="x:String" x:Key="istrFilePrefix">[dictQueueData("Aadhar file")]</InArgument>
-        <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="odictVerifiedData">[dictVerifiedData]</InOutArgument>
+        <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="odictVerifiedData">[iodictVerifiedData]</InOutArgument>
         <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="idictAssets">[idictAsset]</InArgument>
       </ui:InvokeWorkflowFile.Arguments>
       <sap:WorkflowViewStateService.ViewState>
@@ -161,7 +149,7 @@
       <ui:InvokeWorkflowFile.Arguments>
         <InArgument x:TypeArguments="x:Int32" x:Key="iintTaskId">[Cint(dictQueueData("Pan Task"))]</InArgument>
         <InArgument x:TypeArguments="x:String" x:Key="istrFilePrefix">[dictQueueData("Pan file")]</InArgument>
-        <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="odictVerifiedData">[dictVerifiedData]</InOutArgument>
+        <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="odictVerifiedData">[iodictVerifiedData]</InOutArgument>
         <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="idictAssets">[idictAsset]</InArgument>
       </ui:InvokeWorkflowFile.Arguments>
       <sap:WorkflowViewStateService.ViewState>
@@ -175,7 +163,7 @@
       <ui:InvokeWorkflowFile.Arguments>
         <InArgument x:TypeArguments="x:Int32" x:Key="iintTaskId">[Cint(dictQueueData("Salary Task"))]</InArgument>
         <InArgument x:TypeArguments="x:String" x:Key="istrFilePrefix">[dictQueueData("Salary file")]</InArgument>
-        <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="odictVerifiedData">[dictVerifiedData]</InOutArgument>
+        <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="odictVerifiedData">[iodictVerifiedData]</InOutArgument>
         <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="idictAssets">[idictAsset]</InArgument>
       </ui:InvokeWorkflowFile.Arguments>
       <sap:WorkflowViewStateService.ViewState>
@@ -189,7 +177,7 @@
       <ui:InvokeWorkflowFile.Arguments>
         <InArgument x:TypeArguments="x:Int32" x:Key="iintTaskId">[CInt(dictQueueData("Loan Task"))]</InArgument>
         <InArgument x:TypeArguments="x:String" x:Key="istrFilePrefix">[dictQueueData("Loan file")]</InArgument>
-        <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="odictVerifiedData">[dictVerifiedData]</InOutArgument>
+        <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="odictVerifiedData">[iodictVerifiedData]</InOutArgument>
         <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="idictAssets">[idictAsset]</InArgument>
       </ui:InvokeWorkflowFile.Arguments>
       <sap:WorkflowViewStateService.ViewState>
@@ -201,9 +189,9 @@
     </ui:InvokeWorkflowFile>
     <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="20.c Verify with DB - Invoke Workflow File (20. Process Works\20.c Verify with DB.xaml)" sap:VirtualizedContainerService.HintSize="416,56.8" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_8" UnSafe="False" WorkflowFileName="20. Process Works\20.c Verify with DB.xaml">
       <ui:InvokeWorkflowFile.Arguments>
-        <InArgument x:TypeArguments="x:String" x:Key="iintAadhar">[dictVerifiedData("Aadhar Number")]</InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="istrPan">[dictVerifiedData("Pan Number")]</InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="istrLoanFor">[dictVerifiedData("Loan for")]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="iintAadhar">[iodictVerifiedData("Aadhar Number")]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="istrPan">[iodictVerifiedData("Pan Number")]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="istrLoanFor">[iodictVerifiedData("Loan for")]</InArgument>
       </ui:InvokeWorkflowFile.Arguments>
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -224,16 +212,16 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:InvokeWorkflowFile>
-    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="20.e New Loan Create - Invoke Workflow File (20. Process Works\20.e New Loan Create.xaml)" sap:VirtualizedContainerService.HintSize="416,56.8" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_10" UnSafe="False" WorkflowFileName="20. Process Works\20.e New Loan Create.xaml">
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="20.e New Loan Create - Invoke Workflow File (20. Process Works\20.e New Loan Create.xaml)" sap:VirtualizedContainerService.HintSize="416,176" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_10" UnSafe="False" WorkflowFileName="20. Process Works\20.e New Loan Create.xaml">
       <ui:InvokeWorkflowFile.Arguments>
-        <InArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="idictQueueData">[dictVerifiedData]</InArgument>
+        <InArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="idictQueueData">[iodictVerifiedData]</InArgument>
         <InArgument x:TypeArguments="x:String" x:Key="istrAccount">[strAccount]</InArgument>
         <InArgument x:TypeArguments="x:String" x:Key="istrIFSC">[strIFSC]</InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="strLoanId">[ostrLoanID]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="strLoanId">[iodictVerifiedData("Loan ID")]</InArgument>
       </ui:InvokeWorkflowFile.Arguments>
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           <x:Boolean x:Key="IsPinned">False</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
