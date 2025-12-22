@@ -1,39 +1,214 @@
-### Documentation is included in the Documentation folder ###
+# Multi-Document Loan App — UiPath Performer
 
+A comprehensive UiPath automation solution that implements a **multi-document loan application process** using the **Robotic Enterprise Framework (REFramework / Transactional Business Process)** template.
 
-### REFrameWork Template ###
-**Robotic Enterprise Framework**
+This project automates the end-to-end processing of loan applications, ensuring scalability, reliability, and clear exception handling through Orchestrator queues, assets, and storage buckets.
 
-* Built on top of *Transactional Business Process* template
-* Uses *State Machine* layout for the phases of automation project
-* Offers high level logging, exception handling and recovery
-* Keeps external settings in *Config.xlsx* file and Orchestrator assets
-* Pulls credentials from Orchestrator assets and *Windows Credential Manager*
-* Gets transaction data from Orchestrator queue and updates back status
-* Takes screenshots in case of system exceptions
+---
 
+## Repository
 
-### How It Works ###
+**GitHub:** SontuCoder/Multi-Document-Loan-App-UiPath-Performer  
+**Branch:** `main`
 
-1. **INITIALIZE PROCESS**
- + ./Framework/*InitiAllSettings* - Load configuration data from Config.xlsx file and from assets
- + ./Framework/*GetAppCredential* - Retrieve credentials from Orchestrator assets or local Windows Credential Manager
- + ./Framework/*InitiAllApplications* - Open and login to applications used throughout the process
+---
 
-2. **GET TRANSACTION DATA**
- + ./Framework/*GetTransactionData* - Fetches transactions from an Orchestrator queue defined by Config("OrchestratorQueueName") or any other configured data source
+## Summary
 
-3. **PROCESS TRANSACTION**
- + *Process* - Process trasaction and invoke other workflows related to the process being automated 
- + ./Framework/*SetTransactionStatus* - Updates the status of the processed transaction (Orchestrator transactions by default): Success, Business Rule Exception or System Exception
+This automation handles the **Performer layer** of a loan processing system.  
+It consumes transactions from Orchestrator queues, processes completed upstream actions, validates loan data, interacts with storage buckets and databases, and sends customer notifications.
 
-4. **END PROCESS**
- + ./Framework/*CloseAllApplications* - Logs out and closes applications used throughout the process
+The solution follows REFramework standards for:
+- Transactional execution
+- Logging
+- Exception handling
+- Config-driven behavior
 
+---
 
-### For New Project ###
+## Key Features
 
-1. Check the Config.xlsx file and add/customize any required fields and values
-2. Implement InitiAllApplications.xaml and CloseAllApplicatoins.xaml workflows, linking them in the Config.xlsx fields
-3. Implement GetTransactionData.xaml and SetTransactionStatus.xaml according to the transaction type being used (Orchestrator queues by default)
-4. Implement Process.xaml workflow and invoke other workflows related to the process being automated
+- REFramework-based state machine and transactional execution
+- Orchestrator Queue integration
+- UiPath Storage Bucket integration
+- Centralized configuration using Config.xlsx and Orchestrator Assets
+- Credential management via Orchestrator Assets or Windows Credential Manager
+- Screenshot capture on system exceptions
+- Modular and extensible workflow design
+
+---
+
+## Prerequisites
+
+- UiPath Studio / UiPath Robot (Windows)
+- UiPath Orchestrator (recommended)
+- Configured Orchestrator Queue
+- Configured Orchestrator Assets:
+  - Queue name
+  - Credential asset names
+  - Application paths and timeouts
+- Storage Bucket configured in Orchestrator
+- Database access for loan validation (optional but recommended)
+
+---
+
+## High-Level Workflow
+
+### 1. Initialization
+- Loads configuration from `Config.xlsx` and Orchestrator Assets
+- Initializes required applications
+- Validates environment readiness
+
+### 2. Transaction Retrieval
+- Fetches transaction items from the configured Orchestrator Queue
+- Each transaction represents a loan-related action to be processed
+
+### 3. Transaction Processing
+- Delegates business logic execution to modular workflows
+- Handles validations, DB checks, and loan creation logic
+
+### 4. Cleanup
+- Gracefully closes applications
+- Updates transaction status
+- Releases system resources
+
+---
+
+## Performer Logic (Detailed)
+
+The **Performer** is responsible for executing loan-related actions once upstream processes have completed successfully.
+
+### Step-by-Step Performer Flow
+
+### 1. Take Action Details from Queue
+- Retrieve transaction item from Orchestrator Queue
+- Extract:
+  - Action status
+  - Storage bucket reference
+  - Customer and loan metadata
+
+---
+
+### 2. Validate Action Status
+- If action status is **Completed** → Continue processing
+- If action status is **Not Completed / Failed**:
+  - Mark transaction as failed
+  - Exit transaction gracefully
+
+---
+
+### 3. Fetch Output File from Storage Bucket
+- Access the configured UiPath Storage Bucket
+- Download the ZIP output file related to the transaction
+- Store the file locally in the `Output` directory
+
+---
+
+### 4. Unzip and Extract Loan Details
+- Unzip the downloaded archive
+- Extract and parse loan-related information:
+  - Customer details
+  - Loan application data
+  - Supporting documents
+- Normalize extracted data for validation
+
+---
+
+### 5. Verify Existing Loan in Database
+- Query database to check if a loan already exists for the customer
+- Decision logic:
+  - **Loan already exists**
+    - Throw a **Business Exception**
+    - Send failure notification email
+    - Mark transaction as *Failed – Duplicate Loan*
+  - **Loan does not exist**
+    - Proceed to loan creation
+
+---
+
+### 6. Create New Loan
+- Create a new loan record in the system/database
+- Capture the generated **Loan ID**
+- Ensure all validations and mandatory fields are satisfied
+
+---
+
+### 7. Send Customer Notification
+- Send confirmation email to the customer
+- Email includes:
+  - Loan creation success message
+  - Generated Loan ID
+  - Next steps or reference information
+
+---
+
+### 8. Update Transaction Status
+- Mark transaction as **Successful** in Orchestrator
+- Attach output details if required (Loan ID, remarks, timestamps)
+
+---
+
+## Error Handling Strategy
+
+### Business Exceptions
+- Duplicate loan detected
+- Invalid or incomplete loan data
+
+### System Exceptions
+- Storage bucket access failures
+- ZIP extraction errors
+- Database connectivity issues
+- Application crashes
+
+### On Exception:
+- Screenshot captured using `TakeScreenshot.xaml`
+- Error logged via REFramework logging mechanism
+- Email notification sent when applicable
+- Transaction status updated accordingly
+
+---
+
+## Configuration
+
+- Update Assets with:
+  - Orchestrator Queue name
+  - Storage Bucket name
+  - Asset names
+  - Application paths and timeouts
+- Ensure all Orchestrator Assets and credentials are available
+
+---
+
+## Running the Project
+
+1. Open the project in UiPath Studio
+2. Configure Assets and Queue in Orchestrator
+3. Publish the package (optional) or run locally
+4. Add transactions to the configured queue
+5. Monitor execution via Orchestrator logs
+
+---
+
+## Development Notes
+
+- New business steps can be added under `20. Process Works/`
+- Invoke new workflows from `Process.xaml`
+- Follow REFramework logging and exception patterns for consistency
+
+---
+
+## Troubleshooting
+
+- Check `Output/` folder for downloaded and extracted files
+- Review UiPath Robot and Orchestrator logs
+- Validate Config.xlsx and Asset mappings
+
+---
+
+## Author
+
+**Subhadip Maity**  
+Automation Developer – RPA  
+UiPath | Orchestrator | REFramework
+
+---
